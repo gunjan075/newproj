@@ -1,0 +1,126 @@
+vim ~/.gitconfig
+git congif --global core.editor=
+git config --global user.name=
+git config --global user.email=
+git config --global -e =>it opens config file in default editor mode
+git clone
+git init-no need for cloned project
+git status
+git add file =>to stage(to add recursively used git add .)
+git commit -m
+git commit =>will open default editor for witing message
+
+now to do push to remote repository first do pull and then push
+git pull origin master
+git push origin master
+git ls-files =>tracked files
+git reset HEAD file to unstage any modified files
+git checkout --file to discard changes from working directory(bring to last commited)
+Renaming---
+git mv file1 file2
+git status
+	-renamed:file1 ->file2
+git commit -m "commiting renamed file"
+when using bash command
+mv file1 file2
+git status
+	untracked files:file2
+	deletd files:file1
+git add -a add all files including modified deleted and renamed recursively
+git status
+	renamed:file1 ->file2
+git commit
+-----------------------
+git rm =>removes files and stage it
+git help log
+git log => commit history
+git log --oneline --graph --decorate
+git log file.txt
+git log --follow level1/level2/level3 =>renaming
+-----------------
+Alias
+git log --graph --decorate --oneline =>into alisa
+git config --global alias.hist "log --graph --decorate --oneline"
+------------------
+ignore files
+create .gitignore file in project folder
+notepad++ .gitignore =>.gitignore file created add all ignored files we can also add regular expression like *.log so it will ignore all .log file to ignore directoru use log/
+now stage .gitignore file using add and commit
+------------------
+diff/merge tool
+p4merge
+git config --global merge.tool p4merge
+git config --global mergetool.p4merge.path "c:/program files/perforce/p4merge.exe
+
+git config --global diff.tool p4merge
+git config --global difftool.p4merge.path "c:/program files/perforce/p4merge.exe
+
+git diff =>difference between working directory and staging area
+git difftool =>visual diff between working directory and staging area
+
+git diff HEAD =>difference between working directory and git repository
+git difftool HEAD >visual diff between working directory and git repository
+
+git diff --cached HEAD =>difference between staging area and git repository
+git difftool --cached HEAD >visual diff between staging area and git repository
+
+git diff commit1 commit2
+git diff HEAD HEAD^ =>prior commit
+
+limiting diff to one file---
+git diff -- README.md
+git difftol README.md
+
+diff betweeen local repository master and remote repo master------
+git diff master origin/master
+git difftool master origin/master
+
+-----------
+branching and merging
+git branch -a =>list all branches including remote branches
+creating a new branch-
+git branch mynewbranch
+git checkout mynewbranch =>head to mynewbranch
+git branch -m mynewbranch branch2 =>renames branch
+git branch -d mynewbranch =>delets mynewbranch
+
+switching and creating new branch in one go
+git checkout -b title-change
+now do commits in title-change
+git diff master title-change
+git merge title-change =>in master brnach -this is fast forward merger and it works only when there is not any commits in master after making title-change commits
+
+git merge title-change --no-ff
+--------------
+automatic merger
+git checkout -b simple-changes
+git commit -m "changes"
+
+now switch to master and do some commits
+
+git checkout master
+git commit -m "commit in master"
+git merge simple-change -m "merging changes from simple-changes branch"
+-----------------------------
+conflicting merges
+git checkout -b realwork
+do some commits
+git status
+	MODIFIED:FILE
+GIT CHECKOUT MASTER
+do same changes as it was done in realwork change also different changes
+git status
+	modified:file
+git add file
+git diff master realwork
+git merge realwork
+auto-merging failed
+now manually resolve conflit or use visual mergetool
+
+
+
+
+
+
+
+
